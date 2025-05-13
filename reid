@@ -1,0 +1,57 @@
+package com.example.travelcostcalculator
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
+import android.widget.*
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val etNights = findViewById<EditText>(R.id.etNights)
+        val radioGroupAccommodation = findViewById<RadioGroup>(R.id.radioGroupAccommodation)
+        val cbTransport = findViewById<CheckBox>(R.id.cbTransport)
+        val cbInsurance = findViewById<CheckBox>(R.id.cbInsurance)
+        val btnCalculate = findViewById<Button>(R.id.btnCalculate)
+        val tvTotalCost = findViewById<TextView>(R.id.tvTotalCost)
+
+        // Обработчик кнопки "Рассчитать"
+        btnCalculate.setOnClickListener(View.OnClickListener {
+            calculateTravelCost(etNights.text.toString(), radioGroupAccommodation.checkedRadioButtonId,
+                cbTransport.isChecked, cbInsurance.isChecked, tvTotalCost)
+        })
+    }
+
+    private fun calculateTravelCost(nightsStr: String, accommodationType: Int, transportIncluded: Boolean, insuranceIncluded: Boolean, resultTv: TextView) {
+        if (nightsStr.isEmpty()) {
+            Toast.makeText(this@MainActivity, "Укажите количество ночей.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        var totalCost = 0.0
+
+        try {
+            val nights = Integer.parseInt(nightsStr)
+
+            when (accommodationType) {
+                R.id.rbHotel -> totalCost += nights * 100 // Стоимость отеля за ночь
+                R.id.rbHostel -> totalCost += nights * 50 // Стоимость хостела за ночь
+            }
+
+            if (transportIncluded) {
+                totalCost += 50 // Фиксированная цена транспорта
+            }
+
+            if (insuranceIncluded) {
+                totalCost += 20 // Фиксированная цена страховки
+            }
+
+            resultTv.text = "Общая сумма: ${totalCost}"
+        } catch (ex: NumberFormatException) {
+            Toast.makeText(this@MainActivity, "Ошибка ввода количества ночей.", Toast.LENGTH_SHORT).show()
+        }
+    }
+}
