@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/etNights"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Количество ночей"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroupAccommodation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/rbHotel"
+            android:text="Отель"/>
+
+        <RadioButton
+            android:id="@+id/rbHostel"
+            android:text="Хостел"/>
+    </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/cbTransport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Транспорт"/>
+
+    <CheckBox
+        android:id="@+id/cbInsurance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Страховка"/>
+
+    <Button
+        android:id="@+id/btnCalculate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Рассчитать"/>
+
+    <TextView
+        android:id="@+id/tvTotalCost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Общая сумма:"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
